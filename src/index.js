@@ -2,8 +2,9 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 
+// Definirea componentei Quiz
 const Quiz = () => {
-    const navigation = useNavigation()
+    const navigation = useNavigation() // Initializarea hook-ului useNavigation pentru a obține obiectul de navigare
 
     return(
     <View style={styles.container}>

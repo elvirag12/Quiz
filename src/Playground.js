@@ -8,9 +8,9 @@ const Playground = ({ route }) => {
     const [score, setScore] = useState(0);
     const [showResults, setShowResults] = useState(false);
 
-    const { category } = route.params
+    const { category } = route.params // Extrage categoria din proprietatile rutei
 
-    useEffect(() => {
+    useEffect(() => {  // Utilizează efectul pentru a apela functia getQuestions la incarcarea componentei
         getQuestions()
     }, [])
 
@@ -24,28 +24,28 @@ const Playground = ({ route }) => {
             console.log('No matching documents...');
             return;
         }
-        const allQuestions = snapshot.docs.map(doc => doc.data());
-        //const shuffleQuestions = allQuestions.sort(() => 0.5 - Math.random());
-        //setQuestions(shuffleQuestions.slice(0,10));
+        const allQuestions = snapshot.docs.map(doc => doc.data());// Extrage datele din fiecare document din snapshot folosind map() și returnează un array cu aceste date
         setQuestions(allQuestions);
     };
 
+    // Functia pentru gestionarea selectiei optiunii pentru o intrebare
     const handleOptionSelect = (questionIndex, option) => {
-        setSelectedOptions({
-            ...selectOption,
-            [questionIndex]: option,
+        setSelectedOptions({ // Actualizeaza starea optiunilor selectate
+            ...selectOption, // Pastreaza optiunile selectate anterior
+            [questionIndex]: option, // Actualizeaza optiunea selectata pentru intrebarea cu indexul specificat
         });
     };
 
+    // Funcția pentru gestionarea trimiterii răspunsurilor
     const handleSubmit = () => {
         let correctAnswers = 0;
-        questions.forEach((question, index) => {
-            if (selectOption[index] === question.correctOption){
-                correctAnswers++;
+        questions.forEach((question, index) => { // Itereaza prin fiecare intrebare si verifica raspunsul
+            if (selectOption[index] === question.correctOption){ // Daca raspunsul este corect
+                correctAnswers++; // Se incrementeaza variabila
             }
         });
-        setScore(correctAnswers);
-        setShowResults(true);
+        setScore(correctAnswers); // Starea scorului se actualizeaza cu numarul de raspunsuri corecte
+        setShowResults(true); 
 
     };
 
